@@ -1,0 +1,13 @@
+from typing import Any
+
+from ._hl.attrs import AttributeManager
+from ._hl.base import HLObject
+
+re_attr_match: Any
+re_item_match: Any
+re_object_match: Any
+
+def h5py_item_completer(context, command): ...
+def h5py_attr_completer(context, command): ...
+def h5py_completer(self, event): ...
+def load_ipython_extension(ip: Any | None = ...) -> None: ...

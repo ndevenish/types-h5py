@@ -1,0 +1,26 @@
+from typing import Any
+
+import h5py._objects
+
+ATTR: int
+BADID: int
+DATASET: int
+DATASPACE: int
+DATATYPE: int
+FILE: int
+GENPROP_CLS: int
+GENPROP_LST: int
+GROUP: int
+REFERENCE: int
+
+def dec_ref(*args, **kwargs) -> Any: ...
+def get_file_id(*args, **kwargs) -> Any: ...
+def get_name(*args, **kwargs) -> Any: ...
+def get_ref(*args, **kwargs) -> Any: ...
+def get_type(*args, **kwargs) -> Any: ...
+def inc_ref(*args, **kwargs) -> Any: ...
+
+phil: h5py._objects.FastRLock
+
+def with_phil(*args, **kwargs) -> Any: ...
+def wrap_identifier(*args, **kwargs) -> Any: ...
