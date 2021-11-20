@@ -16,7 +16,7 @@ find out -name "*.pyi" -print0 | xargs  -0 sed -E -i '' \
 
 # Repeat import names 'from a import b as b'
 # NOTE: This breaks explicit re-export. Things we need to do this for are handled later
-find out -name "*.pyi" -print0 | xargs  -0 perl -p -i -e 's;(?<=[ ,])([a-zA-Z][^,\s]*) as \1;\1;g'
+find out -name "*.pyi" | grep -v "__init__.pyi" | xargs perl -p -i -e 's;(?<=[ ,])([a-zA-Z][^,\s]*) as \1;\1;g'
 # Remove __pyx_unpickle
 find out -name "*.pyi" -print0 | xargs -0 perl -p -i -e 's;^def __pyx.+\n;;g' out/h5py/_conv.pyi
 # np.object_
