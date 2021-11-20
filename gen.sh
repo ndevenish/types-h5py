@@ -24,7 +24,11 @@ find out -name "*.pyi" -print0 | xargs -0 perl -p -i -e 's;\[object_\];\[numpy.o
 # Handle explicit re-exports
 sed -i '' -e '1s/^/from os import fsdecode as fsdecode, fsencode as fsencode, fspath as fspath\n/' out/h5py/_hl/compat.pyi
 sed -i '' -e 's/with_phil/with_phil as with_phil/' -e 's/ phil/ phil as phil/' out/h5py/_hl/base.pyi
-
+# classmethod __init__
+find out -name "*.pyi" -print0 | xargs -0 \
+    sed -i '' -e 's/@classmethod\n +def __init__/def __init__/'
+# @classmethod
+#     def __init__
 # Format and sort this
 isort out
 black out
