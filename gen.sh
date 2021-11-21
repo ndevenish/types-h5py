@@ -33,14 +33,28 @@ cat <<EOF > rewrite.py
 import re
 import sys
 from pathlib import Path
+import difflib
 
 for filename in sys.argv[3:]:
     p = Path(filename)
     print("Rewriting", p)
-    p.write_text(
-        re.sub(sys.argv[1], sys.argv[2], p.read_text(), re.M)
-    )
+    in_s = p.read_text()
+    out_s = re.sub(sys.argv[1], sys.argv[2], in_s, flags=re.M)
+    if out_s != in_s:
+        print(
+            "\n".join(
+                difflib.unified_diff(
+                    in_s.splitlines(),
+                    out_s.splitlines(),
+                    fromfile=filename,
+                    tofile=filename,
+                )
+            )
+        )
+        p.write_text(out_s)
+        print()
 EOF
+
 find out -name "*.pyi" -print0 | xargs -0 python3 rewrite.py \
     '@classmethod\n\s+def __init__' 'def __init__'
 
