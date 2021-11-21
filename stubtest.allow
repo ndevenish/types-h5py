@@ -1,0 +1,5 @@
+h5py.Dataset.collective
+h5py.File.atomic
+h5py._hl.dataset.CollectiveContext
+h5py._hl.dataset.Dataset.collective
+h5py._hl.files.File.atomic
