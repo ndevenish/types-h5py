@@ -57,9 +57,9 @@ class DatasetID(h5py._objects.ObjectID):
     def __setstate__(self, state) -> Any: ...
 
 class StoreInfo(NamedTuple):
-    byte_offset: Any
     chunk_offset: Any
     filter_mask: Any
+    byte_offset: Any
     size: Any
 
 def with_phil(*args, **kwargs) -> Any: ...

@@ -21,9 +21,9 @@ index 613dae3..568755d 100644
 -    @classmethod
 -    def _make(self, *args, **kwargs) -> Any: ...
 +class StoreInfo(NamedTuple):
-+    byte_offset: Any
 +    chunk_offset: Any
 +    filter_mask: Any
++    byte_offset: Any
 +    size: Any
  
  def with_phil(*args, **kwargs) -> Any: ...
