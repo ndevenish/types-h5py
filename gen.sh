@@ -70,6 +70,7 @@ sed -i '' -e '1s/^/from typing import NamedTuple\n/' out/h5py/h5d.pyi
 sed -i '' -e 's/import _collections//g' out/h5py/h5d.pyi
 sed -i '' -e 's/import _collections//g' out/h5py/h5t.pyi
 sed -i '' -e '1s/^/from typing import NamedTuple\n/' out/h5py/h5t.pyi
+# exit
 patch -p1 < 0001-Fix-NamedTuples.patch
 
 # Re-Format and sort this

@@ -11,7 +11,6 @@ FILE: int
 GENPROP_CLS: int
 GENPROP_LST: int
 GROUP: int
-REFERENCE: int
 
 def dec_ref(*args, **kwargs) -> Any: ...
 def get_file_id(*args, **kwargs) -> Any: ...
