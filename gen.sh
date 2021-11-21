@@ -25,10 +25,25 @@ find out -name "*.pyi" -print0 | xargs -0 perl -p -i -e 's;\[object_\];\[numpy.o
 sed -i '' -e '1s/^/from os import fsdecode as fsdecode, fsencode as fsencode, fspath as fspath\n/' out/h5py/_hl/compat.pyi
 sed -i '' -e 's/with_phil/with_phil as with_phil/' -e 's/ phil/ phil as phil/' out/h5py/_hl/base.pyi
 # classmethod __init__
-find out -name "*.pyi" -print0 | xargs -0 \
-    sed -i '' -e 's/@classmethod\n +def __init__/def __init__/'
-# @classmethod
-#     def __init__
+# find out -name "*.pyi" -print0 | xargs -0 sed -E -i '' 'N; s/@classmethod\n +def __init__/def __init__/g'
+# find $PWD -type d | while read dir;do find $dir -type f -maxdepth 1 | head -1;done
+
+# Rewrite classmethod __init__ definitions
+cat <<EOF > rewrite.py
+import re
+import sys
+from pathlib import Path
+
+for filename in sys.argv[3:]:
+    p = Path(filename)
+    print("Rewriting", p)
+    p.write_text(
+        re.sub(sys.argv[1], sys.argv[2], p.read_text(), re.M)
+    )
+EOF
+find out -name "*.pyi" -print0 | xargs -0 python3 rewrite.py \
+    '@classmethod\n\s+def __init__' 'def __init__'
+
 # Format and sort this
 isort out
 black out
